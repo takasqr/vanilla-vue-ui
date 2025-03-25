@@ -1,20 +1,22 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
+import Tooltip from './basic/tooltip/Tooltip.vue';
+import { ref } from 'vue';
+
+const isReact = ref(false)
+
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <!-- 3) :isReact="isReact" で子コンポーネントに受け渡す -->
+  <Tooltip
+    reactiveText="Clicked."
+    :isReact="isReact"
+  >
+    <!-- 4) クリックで isReact.value = true と書いてリアクティブに変更する -->
+    <Button @click="isReact = true">Text</Button>
+  </Tooltip>
 </template>
 
 <style scoped>
