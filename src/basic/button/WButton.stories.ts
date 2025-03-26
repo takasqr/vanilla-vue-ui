@@ -25,15 +25,15 @@ export const Primary: Story = {
     },
     components: { WButton },
     template: `
-      <div><w-button :classes="classes">OK</w-button></div>
-      <div><w-button :classes="classes" href="/">OK</w-button></div>
+      <div><w-button>OK</w-button></div>
+      <div><w-button href="/">OK</w-button></div>
     `,
   }),
   args: {
     classes: {
       color: 'text-onSurface dark:text-onSurface-dark',
       backgroundColor: '',
-      border: 'border border-outline-100 dark:border-outline-dark'
+      border: 'border border-outline dark:border-outline-dark'
     }
   }
 };
@@ -42,6 +42,13 @@ export const Block: Story = {
   render: () => ({
     components: { WButton },
     template: '<w-button block>OK</w-button>',
+  }),
+};
+
+export const Disabled: Story = {
+  render: () => ({
+    components: { WButton },
+    template: '<w-button :disabled="true">OK</w-button>',
   }),
 };
 

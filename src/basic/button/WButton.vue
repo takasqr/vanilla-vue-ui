@@ -67,10 +67,10 @@ const props = defineProps({
 const defaultClasses: ClassObject = {
   base: 'font-bold',
   spacing: 'py-2 px-4',
-  backgroundColor: 'bg-white',
+  backgroundColor: '',
   rounded: 'rounded-full',
-  color: 'hover:bg-gray-50',
-  border: 'border border-gray-200',
+  color: 'text-onSurface dark:text-onSurface-dark hover:bg-surfaceHover dark:hover:bg-surfaceHover-dark',
+  border: 'border border-outline dark:border-outline-dark',
   size: '',
 }
 
