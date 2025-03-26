@@ -11,7 +11,7 @@ export default {
         text: {
           light: '#1f2937', // gray-800
           DEFAULT: '#1f2937',
-          dark: '#1f2937',
+          dark: '#fff',
         },
         primary: {
           light: '#6366f1',
@@ -188,10 +188,11 @@ export default {
           DEFAULT: '#DED8E1',
           dark: '#141218',
         },
+        // 基本的な背景色で使用する
         surface: {
-          light: '#FEF7FF',
-          DEFAULT: '#FEF7FF',
-          dark: '#141218',
+          light: '#e5e7eb', // gray-200
+          DEFAULT: '#e5e7eb',
+          dark: '#111827', // gray-900
         },
         surfaceBright: {
           light: '#FEF7FF',
@@ -223,10 +224,11 @@ export default {
           DEFAULT: '#E6E0E9',
           dark: '#36343B',
         },
+        // surface 上の文字や記号
         onSurface: {
-          light: '#1D1B20',
-          DEFAULT: '#1D1B20',
-          dark: '#E6E0E9',
+          light: '#111827', // gray-900
+          DEFAULT: '#111827',
+          dark: '#fff', // white
         },
         surfaceVariant: {
           light: '#E7E0EC',
@@ -237,6 +239,11 @@ export default {
           light: '#49454F',
           DEFAULT: '#49454F',
           dark: '#CAC4D0',
+        },
+        surfaceHover: { // オリジナルの定義
+          light: '#f9fafb', // gray-50
+          DEFAULT: '#f9fafb',
+          dark: '#1e293b', // gray-800
         },
         outline: {
           light: '#79747E',
