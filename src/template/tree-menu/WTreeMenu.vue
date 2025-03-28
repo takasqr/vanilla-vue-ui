@@ -116,7 +116,7 @@ import {
   ChevronRightIcon,
   ChevronDownIcon
 } from '@heroicons/vue/24/outline'
-import SecondaryButton from '../secondary-button/SecondaryButton.vue'
+import SecondaryButton from '../secondary-button/WSecondaryButton.vue'
 
 const props = defineProps({
   navigationItems: {

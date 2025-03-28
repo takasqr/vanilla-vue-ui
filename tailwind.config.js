@@ -14,9 +14,9 @@ export default {
           dark: '#fff',
         },
         primary: {
-          light: '#6366f1',
-          DEFAULT: '#6366f1',
-          dark: '#D0BCFF',
+          light: '#f59e0b',
+          DEFAULT: '#f59e0b',
+          dark: '#f59e0b',
         },
         primaryVia: {
           light: '#29070d',
@@ -190,8 +190,8 @@ export default {
         },
         // 基本的な背景色で使用する
         surface: {
-          light: '#e5e7eb', // gray-200
-          DEFAULT: '#e5e7eb',
+          light: '#f9fafb', // gray-50
+          DEFAULT: '#f9fafb',
           dark: '#111827', // gray-900
         },
         surfaceBright: {

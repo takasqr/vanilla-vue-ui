@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
-import Tooltip from './basic/tooltip/Tooltip.vue';
+import Tooltip from './basic/tooltip/WTooltip.vue';
 import { ref } from 'vue';
 
 const isReact = ref(false)
