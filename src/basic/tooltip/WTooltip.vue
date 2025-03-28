@@ -1,6 +1,6 @@
 <template>
   <span class="relative group">
-    <div @mouseenter="showTooltip" @mouseleave="hideTooltip">
+    <div @mouseenter="showTooltip" @mouseleave="hideTooltip" class="inline-block">
       <slot />
     </div>
     <span v-show="isReact" class="absolute z-50 whitespace-nowrap -bottom-12 left-1/2 -translate-x-1/2 bg-gray-600 py-1 px-2 text-white rounded">{{ reactiveText }}</span>
