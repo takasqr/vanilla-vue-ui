@@ -36,3 +36,7 @@ storybook-static
 .firebase
 
 /basic
+/template
+/page-template
+/types
+/util
