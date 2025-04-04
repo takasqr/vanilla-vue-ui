@@ -2,9 +2,9 @@
   <slot name="header"></slot>
 
   <w-container>
-    <w-spacer-ladder>
+    <w-spacer-island>
       <slot name="ad" />
-    </w-spacer-ladder>
+    </w-spacer-island>
 
     <main>
       <w-spacer-island>
