@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <nav class="flex" aria-label="Breadcrumb">
     <ol role="list" class="flex items-center space-x-4">
@@ -10,9 +9,13 @@
           </a>
         </div>
       </li>
-      <li v-for="page in pages" :key="page.name">
+      <li v-for="(page, index) in pages" :key="page.name">
         <div class="flex items-center">
-          <ChevronRightIcon :class="mergedClasses.icon?.base" aria-hidden="true" />
+          <ChevronRightIcon
+           :class="mergedClasses.icon?.base"
+           v-if="index < pages.length - 1"
+           aria-hidden="true"
+          />
           <a
            :href="`${page.href}`"
            :class="mergedClasses.text?.base"
