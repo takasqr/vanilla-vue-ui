@@ -1,6 +1,6 @@
 <template>
   <div>
-    <w-container class="py-8 md:py-10">
+    <w-container class="py-4 md:py-10">
       <slot />
     </w-container>
   </div>
