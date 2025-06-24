@@ -17,7 +17,7 @@
            aria-hidden="true"
           />
           <a
-           :href="`${page.href}`"
+           :href="`${getHref(page.href)}`"
            :class="mergedClasses.text?.base"
            :aria-current="page.current ? 'page' : undefined"
           >
@@ -36,10 +36,15 @@ import type { RouteMeta } from 'vue-router';
 import { ref, onMounted, watch, type PropType } from 'vue';
 import type { ClassObject } from '../../types/ClassObject';
 import { deepMergeClassObject } from '../../util';
+import { withTrailingSlash } from 'ufo'
 
 const props = defineProps({
   classes: {
     type: Object as PropType<ClassObject>,
+  },
+  trailingSlash: {
+    type: Boolean as PropType<boolean>,
+    default: false
   }
 })
 
@@ -96,5 +101,13 @@ function splitPath(path: string): string[] {
 function getRouteMeta(path: string): RouteMeta | undefined {
   const matchedRoute = router.getRoutes().find(route => route.path === path);
   return matchedRoute?.meta;
+}
+
+function getHref(path: string): string {
+  if (props.trailingSlash) {
+    return withTrailingSlash(path)
+  } else {
+    return path
+  }
 }
 </script>
