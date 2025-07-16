@@ -10,7 +10,7 @@
         </div>
       </li>
       <li v-for="(page, index) in pages" :key="page.name">
-        <div class="flex items-center">
+        <div v-if="page.name.length > 1" class="flex items-center">
           <ChevronRightIcon
            :class="mergedClasses.icon?.base"
            v-if="index < pages.length - 1"
