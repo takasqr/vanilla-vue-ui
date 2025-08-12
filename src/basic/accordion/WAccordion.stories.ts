@@ -47,3 +47,36 @@ export const Primary: Story = {
     }
   }
 };
+
+export const Unmount: Story = {
+  render: (args: AccordionProps) => ({
+    setup() {
+      return {
+        ...args
+      }
+    },
+    components: { Accordion },
+    template: '<Accordion :contents="contents" :classes="classes" :unmount="false"></Accordion>',
+  }),
+  args: {
+    contents: [
+      {
+         title: "What's the best thing about Switzerland?",
+         body: "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat."
+      }
+    ],
+    classes: {
+      title: {
+        text: {
+          color: 'text-onSurface dark:text-onSurface-dark'
+        }
+      },
+      content: {
+        text: {
+          color: 'text-onSurface dark:text-onSurface-dark'
+        }
+      }
+    }
+  }
+};
+

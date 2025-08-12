@@ -18,7 +18,7 @@
           </span>
         </DisclosureButton>
       </dt>
-      <DisclosurePanel as="dd" class="mt-2 pr-12">
+      <DisclosurePanel as="dd" class="mt-2 pr-12" :unmount="props.unmount">
         <p
           :class="[
             mergedClasses.content?.base,
@@ -46,7 +46,11 @@ const props = defineProps({
   },
   classes: {
     type: Object as PropType<ClassObject>,
-  }
+  },
+  unmount: { 
+    type: Boolean as PropType<boolean>,
+    default: true
+  },
 })
 
 const defaultClasses: ClassObject = {
