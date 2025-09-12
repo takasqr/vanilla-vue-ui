@@ -1,7 +1,7 @@
 <template>
   <div class="flex">
     <MinusIcon
-      class="flex-none"
+      class="w-6 fill-current flex-none"
       :class="[
         mergedClasses.icon?.color
       ]"
@@ -28,6 +28,7 @@
        >
     </div>
     <PlusIcon
+      class="w-6 fill-current flex-none"
       :class="[
         mergedClasses.icon?.color,
       ]"
