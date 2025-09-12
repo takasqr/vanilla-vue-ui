@@ -9,11 +9,11 @@
           </a>
         </div>
       </li>
-      <li v-for="(page, index) in pages" :key="page.name">
-        <div v-if="page.name.length > 1" class="flex items-center">
+      <li v-for="(page, index) in filteredPages" :key="page.name">
+        <div class="flex items-center">
           <ChevronRightIcon
            :class="mergedClasses.icon?.base"
-           v-if="index < pages.length - 1"
+           v-if="index < filteredPages.length - 1"
            aria-hidden="true"
           />
           <a
@@ -33,7 +33,7 @@
 import { ChevronRightIcon, HomeIcon } from '@heroicons/vue/20/solid'
 import { useRouter, useRoute } from 'vue-router'
 import type { RouteMeta } from 'vue-router';
-import { ref, onMounted, watch, type PropType } from 'vue';
+import { ref, onMounted, watch, type PropType, computed } from 'vue';
 import type { ClassObject } from '../../types/ClassObject';
 import { deepMergeClassObject } from '../../util';
 import { withTrailingSlash } from 'ufo'
@@ -68,6 +68,8 @@ type Page = {
 };
 
 const pages = ref<Page[]>([]);
+// 表示対象だけに絞る（<li> ごと消えるので余白が生まれない）
+const filteredPages = computed(() => pages.value.filter(p => p.name.length > 1))
 
 const router = useRouter();
 const route = useRoute();
