@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-hidden px-4 py-4 rounded-lg ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-primary dark:focus-within:ring-primary-dark bg-surface dark:bg-surface-dark">
+  <div class="overflow-hidden px-4 py-4 rounded-lg ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-primary dark:focus-within:ring-primary-dark bg-white dark:bg-surfaceContainerLow-dark">
     <label :for="name" class="sr-only">{{ label }}</label>
     <textarea
       :id="id"
