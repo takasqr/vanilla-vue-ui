@@ -13,7 +13,6 @@
         <div class="flex items-center">
           <ChevronRightIcon
            :class="mergedClasses.icon?.base"
-           v-if="index < filteredPages.length - 1"
            aria-hidden="true"
           />
           <a
@@ -74,7 +73,9 @@ const filteredPages = computed(() => pages.value.filter(p => p.name.length > 1))
 const router = useRouter();
 const route = useRoute();
 
-onMounted(set);
+// onMounted(set);
+set()
+
 watch(() => route.path, set);
 
 function set() {
