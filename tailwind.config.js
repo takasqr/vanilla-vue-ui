@@ -205,9 +205,9 @@ export default {
           dark: '#0F0D13',
         },
         surfaceContainerLow: {
-          light: '#F7F2FA',
-          DEFAULT: '#F7F2FA',
-          dark: '#1D1B20',
+          light: '#F3F4F6', // gray-100
+          DEFAULT: '#F3F4F6',
+          dark: '#1E293B',  // slate-800
         },
         surfaceContainer: {
           light: '#F3EDF7',
