@@ -72,7 +72,7 @@ const defaultClasses: ClassObject = {
   content: {
     input: {
       base: 'block w-full resize-none border-0 placeholder:text-gray-400 focus:outline-none focus:ring-0',
-      backgroundColor: 'bg-surface dark:bg-surface-dark',
+      backgroundColor: 'bg-white dark:bg-surfaceContainerLow-dark',
       color: 'text-onSurface dark:text-onSurface-dark'
     }
   }
