@@ -26,25 +26,17 @@ export const Primary: Story = {
     components: { TextField },
     template: `
       <div class="p-4">
-        <div class="mb-2"><TextField size="xs" value="John" :classes="classes"></TextField></div>
-        <div class="mb-2"><TextField size="sm" value="John" :classes="classes"></TextField></div>
-        <div class="mb-2"><TextField size="base" value="John" :classes="classes"></TextField></div>
-        <div class="mb-2"><TextField size="lg" value="John" :classes="classes"></TextField></div>
-        <div class="mb-2"><TextField size="2xl" value="John" :classes="classes"></TextField></div>
-        <div class="mb-2"><TextField size="3xl" value="John" :classes="classes"></TextField></div>
-        <div class="mb-2"><TextField size="6xl" value="John" :classes="classes"></TextField></div>
+        <div class="mb-2"><TextField size="xs" value="John"></TextField></div>
+        <div class="mb-2"><TextField size="sm" value="John"></TextField></div>
+        <div class="mb-2"><TextField size="base" value="John"></TextField></div>
+        <div class="mb-2"><TextField size="lg" value="John"></TextField></div>
+        <div class="mb-2"><TextField size="2xl" value="John"></TextField></div>
+        <div class="mb-2"><TextField size="3xl" value="John"></TextField></div>
+        <div class="mb-2"><TextField size="6xl" value="John"></TextField></div>
       </div>
     `,
   }),
   args: {
-    classes: {
-      content: {
-        input: {
-          color: 'text-onSurface dark:text-onSurface-dark',
-          backgroundColor: 'bg-white dark:bg-surface-dark'
-        }
-      }
-    }
   }
 };
 

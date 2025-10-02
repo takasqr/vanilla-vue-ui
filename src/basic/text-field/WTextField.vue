@@ -84,13 +84,13 @@ const defaultClasses: ClassObject = {
   content: {
     input: {
       base: "block w-full border-0 p-0 placeholder:text-gray-400 sm:leading-6 focus:outline-none focus:ring-0",
-      backgroundColor: 'bg-surface dark:bg-surface-dark',
+      backgroundColor: 'bg-white dark:bg-surfaceContainerLow-dark',
       color: 'text-onSurface dark:text-onSurface-dark'
     },
   },
   outline: {
     base: "rounded-md px-3 pb-1.5 pt-2.5 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-primary dark:focus-within:ring-primary-dark",
-    backgroundColor: 'bg-surface dark:bg-surface-dark',
+    backgroundColor: 'bg-white dark:bg-surfaceContainerLow-dark',
   },
   label: {
     base: "block text-xs font-medium text-onSurface dark:text-onSurface-dark"
