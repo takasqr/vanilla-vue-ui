@@ -27,3 +27,16 @@ export const Primary: Story = {
     `,
   }),
 };
+
+export const None: Story = {
+  render: () => ({
+    components: { WHorizontalScroll },
+    template: `
+      <WHorizontalScroll :scrollbar-width="'none'">
+        <img src="/carousel-0.webp" alt="Slide 1">
+        <img src="/carousel-1.webp" alt="Slide 2">
+        <img src="/carousel-2.webp" alt="Slide 3">
+      </WHorizontalScroll>
+    `,
+  }),
+};

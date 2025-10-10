@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 
 type ScrollbarWidth = 'auto' | 'thin' | 'none'
 
@@ -39,22 +39,29 @@ const cssVars = computed(() => {
 })
 
 const scrollbarWidth = props.scrollbarWidth
+
+onMounted(() => {
+  if (!document.getElementById('scrollbar-style')) {
+    const style = document.createElement('style')
+    style.id = 'scrollbar-style'
+    style.textContent = `
+      .custom-scrollbar {
+        /* Firefox */
+        scrollbar-width: var(--scrollbar-width);
+      }
+
+      /* Chromium / Safari */
+      .custom-scrollbar::-webkit-scrollbar {
+        width: var(--webkit-scrollbar-size);
+        height: var(--webkit-scrollbar-size);
+      }
+
+      /* 完全に非表示（スクロール自体は可能） */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+    `
+    document.head.appendChild(style)
+  }
+})
 </script>
-
-<style scoped>
-.custom-scrollbar {
-  /* Firefox */
-  scrollbar-width: var(--scrollbar-width);
-}
-
-/* Chromium / Safari */
-.custom-scrollbar::-webkit-scrollbar {
-  width: var(--webkit-scrollbar-size);
-  height: var(--webkit-scrollbar-size);
-}
-
-/* 完全に非表示（スクロール自体は可能） */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-</style>

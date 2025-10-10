@@ -116,6 +116,30 @@ onMounted(() => {
       updateSliderBg({ value: Number(modelValue.value), max: props.max, min: props.min })
     })
   }
+
+  if (!document.getElementById('range-thumb-style')) {
+    const style = document.createElement('style')
+    style.id = 'range-thumb-style'
+    style.textContent = `
+      input[type="range"]::-webkit-slider-thumb {
+        background-color: white;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 2px solid rgb(251, 191, 36);
+      }
+      input[type="range"]::-moz-range-thumb {
+        background-color: white;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 2px solid rgb(251, 191, 36);
+      }
+    `
+    document.head.appendChild(style)
+  }
 })
 
 // props.classesが渡されていない場合、defaultClassesを使用する
@@ -168,23 +192,3 @@ function emitCustomEvent(value: string) {
   emit('customInput', event)
 }
 </script>
-
-<style>
-input[type="range"]::-webkit-slider-thumb {
-  background-color: white;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 2px solid rgb(251, 191, 36);
-}
-
-input[type="range"]::-moz-range-thumb {
-  background-color: white;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 2px solid rgb(251, 191, 36);
-}
-</style>
