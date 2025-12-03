@@ -44,6 +44,10 @@ const props = defineProps({
   trailingSlash: {
     type: Boolean as PropType<boolean>,
     default: false
+  },
+    hideWords: {
+    type: Array as PropType<string[]>,
+    default: () => []
   }
 })
 
@@ -65,10 +69,17 @@ type Page = {
     href: string;
     current: boolean;
 };
-
 const pages = ref<Page[]>([]);
 // 表示対象だけに絞る（<li> ごと消えるので余白が生まれない）
-const filteredPages = computed(() => pages.value.filter(p => p.name.length > 1))
+const filteredPages = computed(() => {
+  const hideSet = props.hideWords.map(w => w.toLowerCase())
+
+  return pages.value.filter(p => {
+    if (p.name.length <= 1) return false
+
+    return !hideSet.includes(p.name.toLowerCase())
+  })
+})
 
 const router = useRouter();
 const route = useRoute();
