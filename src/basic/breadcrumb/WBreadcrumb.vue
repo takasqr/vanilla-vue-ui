@@ -20,7 +20,7 @@
            :class="mergedClasses.text?.base"
            :aria-current="page.current ? 'page' : undefined"
           >
-            {{ page.name }}
+            {{ decodeURIComponent(page.name) }}
           </a>
         </div>
       </li>

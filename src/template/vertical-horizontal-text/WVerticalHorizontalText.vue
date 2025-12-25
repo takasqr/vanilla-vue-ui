@@ -99,7 +99,8 @@ const computedStyle = computed(() => ({
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
-
+  /* このコードをリリースする時にWebのCursiveとフォントチェッカーのコードを消す */
+  padding: 25px 15px;
   scrollbar-width: thin;
 }
 </style>
