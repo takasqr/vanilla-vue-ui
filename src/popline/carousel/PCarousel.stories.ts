@@ -20,9 +20,17 @@ export const Primary: Story = {
     components: { PCarousel },
     template: `
       <PCarousel>
-        <img src="/carousel-0.webp" alt="Slide 1">
-        <img src="/carousel-1.webp" alt="Slide 2">
-        <img src="/carousel-2.webp" alt="Slide 3">
+        <template #slide-0>
+          <img src="/carousel-0.webp" />
+        </template>
+
+        <template #slide-1>
+          <img src="/carousel-1.webp" />
+        </template>
+
+        <template #slide-2>
+          <img src="/carousel-2.webp" />
+        </template>
       </PCarousel>
     `,
   }),
