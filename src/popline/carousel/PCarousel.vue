@@ -5,6 +5,10 @@
       bg-white
       py-6 pb-20
     "
+    @mouseenter="stopAuto"
+    @mouseleave="startAuto"
+    @focusin="stopAuto"
+    @focusout="startAuto"
   >
     <!-- slides -->
     <div
@@ -18,7 +22,7 @@
       }"
     >
       <div
-        v-for="(slide, index) in slides"
+        v-for="(_, index) in slides"
         :key="index"
         class="
           shrink-0 w-[75%]
@@ -82,8 +86,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, useSlots } from 'vue'
+import { ref, onMounted, onUnmounted, useSlots } from 'vue'
 
+/* ===== state ===== */
 const currentIndex = ref(0)
 const slideWidth = ref(0)
 const slideStep = ref(0)
@@ -92,11 +97,16 @@ const offset = ref(0)
 const inner = ref<HTMLElement | null>(null)
 const slots = useSlots()
 
-// slot 名が slide-0, slide-1... のものをスライドとして扱う
+/* ===== slides ===== */
 const slides = Object.keys(slots).filter(key =>
   key.startsWith('slide-')
 )
 
+/* ===== auto scroll ===== */
+const INTERVAL = 5000 // 5秒
+let timer: number | null = null
+
+/* ===== lifecycle ===== */
 onMounted(() => {
   const firstSlide = inner.value?.children[0] as HTMLElement
   if (!firstSlide || !inner.value) return
@@ -107,8 +117,15 @@ onMounted(() => {
 
   // 初期状態で中央に配置
   offset.value = (inner.value.clientWidth - slideWidth.value) / 2
+
+  startAuto()
 })
 
+onUnmounted(() => {
+  stopAuto()
+})
+
+/* ===== navigation ===== */
 const next = () => {
   currentIndex.value =
     (currentIndex.value + 1) % slides.length
@@ -117,5 +134,19 @@ const next = () => {
 const prev = () => {
   currentIndex.value =
     (currentIndex.value - 1 + slides.length) % slides.length
+}
+
+/* ===== auto control ===== */
+const startAuto = () => {
+  if (timer !== null) return
+  timer = window.setInterval(() => {
+    next()
+  }, INTERVAL)
+}
+
+const stopAuto = () => {
+  if (timer === null) return
+  clearInterval(timer)
+  timer = null
 }
 </script>
