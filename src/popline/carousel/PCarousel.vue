@@ -22,15 +22,16 @@
         v-for="(name, index) in loopSlides"
         :key="index"
         class="
-          shrink-0 w-[75%]
+          shrink-0
           rounded-2xl overflow-hidden
           border-2 border-black
           transition-all duration-300
         "
+        :style="{ width: `${slideWidth}px` }"
         :class="
           index === currentIndex
             ? 'scale-100 opacity-100'
-            : 'scale-95 opacity-40'
+            : 'scale-95 opacity-40 lg:opacity-80 lg:scale-100'
         "
       >
         <slot :name="name" />
@@ -38,21 +39,23 @@
     </div>
 
     <!-- navigation -->
-    <button
-      type="button"
-      class="absolute left-6 bottom-6 font-bold tracking-wider"
-      @click="prev"
-    >
-      ← PREV
-    </button>
+    <div class="relative max-w-3xl mx-auto">
+      <button
+        type="button"
+        class="absolute left-6 -bottom-12 font-bold tracking-wider"
+        @click="prev"
+      >
+        ← PREV
+      </button>
 
-    <button
-      type="button"
-      class="absolute right-6 bottom-6 font-bold tracking-wider"
-      @click="next"
-    >
-      NEXT →
-    </button>
+      <button
+        type="button"
+        class="absolute right-6 -bottom-12 font-bold tracking-wider"
+        @click="next"
+      >
+        NEXT →
+      </button>
+    </div>
   </div>
 </template>
 
@@ -61,11 +64,11 @@ import { ref, onMounted, onUnmounted, useSlots } from 'vue'
 
 /* ===== slots ===== */
 const slots = useSlots()
-const slideNames = Object.keys(slots).filter(k =>
-  k.startsWith('slide-')
+const slideNames = Object.keys(slots).filter(key =>
+  key.startsWith('slide-')
 )
 
-/* ダミー込みスライド */
+/* ダミー込みスライド（無限用） */
 const loopSlides = [
   slideNames[slideNames.length - 1],
   ...slideNames,
@@ -73,7 +76,7 @@ const loopSlides = [
 ]
 
 /* ===== state ===== */
-const currentIndex = ref(1) // ← 最初は「本物の1枚目」
+const currentIndex = ref(1)
 const isTransition = ref(true)
 
 const slideWidth = ref(0)
@@ -82,8 +85,17 @@ const offset = ref(0)
 
 const inner = ref<HTMLElement | null>(null)
 
+/* ===== responsive width control ===== */
+const getSlideWidthRatio = () => {
+  const w = window.innerWidth
+
+  if (w < 640) return 0.8     // スマホ：少しチラ見え
+  if (w < 1024) return 0.6    // タブレット
+  return 0.4                 // PC：左右フル表示
+}
+
 /* ===== auto scroll ===== */
-const INTERVAL = 2000
+const INTERVAL = 5000
 let timer: number | null = null
 
 const next = () => {
@@ -117,13 +129,15 @@ const jumpTo = (index: number) => {
 
 /* ===== layout ===== */
 const calculateLayout = () => {
-  const firstSlide = inner.value?.children[0] as HTMLElement
-  if (!firstSlide || !inner.value) return
+  if (!inner.value) return
 
   const gap = 24
-  slideWidth.value = firstSlide.offsetWidth
+  const containerWidth = inner.value.clientWidth
+  const ratio = getSlideWidthRatio()
+
+  slideWidth.value = containerWidth * ratio
   slideStep.value = slideWidth.value + gap
-  offset.value = (inner.value.clientWidth - slideWidth.value) / 2
+  offset.value = (containerWidth - slideWidth.value) / 2
 }
 
 /* ===== auto control ===== */
