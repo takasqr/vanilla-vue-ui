@@ -20,7 +20,7 @@
     >
       <div
         v-for="(name, index) in loopSlides"
-        :key="index"
+        :key="name"
         class="
           shrink-0
           rounded-2xl overflow-hidden
@@ -60,20 +60,27 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, useSlots } from 'vue'
+import { ref, computed, onMounted, onUnmounted, useSlots } from 'vue'
 
 /* ===== slots ===== */
 const slots = useSlots()
-const slideNames = Object.keys(slots).filter(key =>
-  key.startsWith('slide-')
+
+const slideNames = computed(() =>
+  Object.keys(slots)
+    .filter((k) => k.startsWith('slide-'))
+    .sort((a, b) => {
+      const na = Number(a.replace('slide-', ''))
+      const nb = Number(b.replace('slide-', ''))
+      return na - nb
+    })
 )
 
 /* ダミー込みスライド（無限用） */
-const loopSlides = [
-  slideNames[slideNames.length - 1],
-  ...slideNames,
-  slideNames[0],
-]
+const loopSlides = computed(() => {
+  const names = slideNames.value
+  if (names.length === 0) return []
+  return [names[names.length - 1], ...names, names[0]]
+})
 
 /* ===== state ===== */
 const currentIndex = ref(1)
@@ -88,10 +95,9 @@ const inner = ref<HTMLElement | null>(null)
 /* ===== responsive width control ===== */
 const getSlideWidthRatio = () => {
   const w = window.innerWidth
-
-  if (w < 640) return 0.8     // スマホ：少しチラ見え
+  if (w < 640) return 0.8     // スマホ
   if (w < 1024) return 0.6    // タブレット
-  return 0.4                 // PC：左右フル表示
+  return 0.4                 // PC
 }
 
 /* ===== auto scroll ===== */
@@ -107,16 +113,17 @@ const prev = () => {
 }
 
 /* ===== infinite loop core ===== */
-const onTransitionEnd = () => {
-  // 末尾ダミー → 本物の先頭
-  if (currentIndex.value === loopSlides.length - 1) {
+const normalizeIndex = () => {
+  if (currentIndex.value <= 0) {
+    jumpTo(loopSlides.value.length - 2)
+  }
+  if (currentIndex.value >= loopSlides.value.length - 1) {
     jumpTo(1)
   }
+}
 
-  // 先頭ダミー → 本物の末尾
-  if (currentIndex.value === 0) {
-    jumpTo(loopSlides.length - 2)
-  }
+const onTransitionEnd = () => {
+  normalizeIndex()
 }
 
 const jumpTo = (index: number) => {
@@ -132,7 +139,10 @@ const calculateLayout = () => {
   if (!inner.value) return
 
   const gap = 24
-  const containerWidth = inner.value.clientWidth
+  const container = inner.value.parentElement
+  if (!container) return
+
+  const containerWidth = container.clientWidth
   const ratio = getSlideWidthRatio()
 
   slideWidth.value = containerWidth * ratio
@@ -152,15 +162,28 @@ const stopAuto = () => {
   timer = null
 }
 
+/* ===== visibility handling ===== */
+const handleVisibilityChange = () => {
+  if (document.hidden) {
+    stopAuto()
+  } else {
+    normalizeIndex()
+    calculateLayout()
+    startAuto()
+  }
+}
+
 /* ===== lifecycle ===== */
 onMounted(() => {
   calculateLayout()
   startAuto()
   window.addEventListener('resize', calculateLayout)
+  document.addEventListener('visibilitychange', handleVisibilityChange)
 })
 
 onUnmounted(() => {
   stopAuto()
   window.removeEventListener('resize', calculateLayout)
+  document.removeEventListener('visibilitychange', handleVisibilityChange)
 })
 </script>
